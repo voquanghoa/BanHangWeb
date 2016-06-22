@@ -12,7 +12,6 @@ namespace BanHang
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
         }
     }
 }
