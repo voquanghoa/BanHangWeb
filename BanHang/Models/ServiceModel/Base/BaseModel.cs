@@ -12,7 +12,7 @@ namespace BanHang.Models.ServiceModel.Base
 	public class BaseModel
 	{
 		[Key]
-		public Guid Id
+		public int Id
 		{
 			get; set;
 		}

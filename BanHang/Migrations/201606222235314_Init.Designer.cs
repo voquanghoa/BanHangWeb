@@ -13,7 +13,7 @@ namespace BanHang.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201606221701126_Init"; }
+            get { return "201606222235314_Init"; }
         }
         
         string IMigrationMetadata.Source

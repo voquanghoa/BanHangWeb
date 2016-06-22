@@ -7,9 +7,13 @@ using System.Web;
 
 namespace BanHang.Models.ServiceModel
 {
-	[Table("Employee")]
-	public class Employee : StoreModel
-	{ 
+	[Table("Employees")]
+	public class Employee : ContactModel
+	{
+		public string LoginName { get; set; }
+
+		public string Password { get; set; }
+
 		public string JobTitle { get; set; }
 	}
 }

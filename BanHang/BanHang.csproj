@@ -53,6 +53,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -205,16 +206,29 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="BanHangDataContext.cs" />
+    <Compile Include="Business\AuthenticationBusiness.cs" />
+    <Compile Include="Business\Logic\AuthenticationRepository.cs" />
+    <Compile Include="Business\Logic\Common\BaseRepository.cs" />
+    <Compile Include="Business\Logic\Common\UnitOfWork.cs" />
+    <Compile Include="Business\Logic\EmployeeRepository.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Converter\Base\BaseConverter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606221701126_Init.cs" />
-    <Compile Include="Migrations\201606221701126_Init.Designer.cs">
-      <DependentUpon>201606221701126_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201606222235314_Init.cs" />
+    <Compile Include="Migrations\201606222235314_Init.Designer.cs">
+      <DependentUpon>201606222235314_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
+    <Compile Include="Models\Communication\Request\LoginForm.cs" />
+    <Compile Include="Models\Dto\Base\BaseDto.cs" />
+    <Compile Include="Models\ServiceModel\Admin.cs" />
+    <Compile Include="Models\ServiceModel\Authentication.cs" />
     <Compile Include="Models\ServiceModel\Base\BaseModel.cs" />
     <Compile Include="Models\ServiceModel\Base\ContactModel.cs" />
     <Compile Include="Models\ServiceModel\Base\StoreModel.cs" />
@@ -229,6 +243,7 @@
     <Compile Include="Models\ServiceModel\Production.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\CookieUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -287,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -297,8 +313,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606221701126_Init.resx">
-      <DependentUpon>201606221701126_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606222235314_Init.resx">
+      <DependentUpon>201606222235314_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

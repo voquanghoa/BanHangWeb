@@ -8,10 +8,49 @@ namespace BanHang.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Employees",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        LoginName = c.String(),
+                        Password = c.String(),
+                        JobTitle = c.String(),
+                        Gender = c.Int(nullable: false),
+                        Address = c.String(),
+                        PhoneNumber = c.String(),
+                        Email = c.String(),
+                        Note = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
+                        Name = c.String(),
+                        CreatedDate = c.DateTime(nullable: false),
+                        LastUpdatedDate = c.DateTime(nullable: false),
+                        CreatedBy = c.Int(nullable: false),
+                        LastUpdatedBy = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Authentications",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SessionCode = c.Guid(nullable: false),
+                        Name = c.String(),
+                        CreatedDate = c.DateTime(nullable: false),
+                        LastUpdatedDate = c.DateTime(nullable: false),
+                        CreatedBy = c.Int(nullable: false),
+                        LastUpdatedBy = c.Int(nullable: false),
+                        Employee_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Employees", t => t.Employee_Id)
+                .Index(t => t.Employee_Id);
+            
+            CreateTable(
                 "dbo.Brands",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         IsDeleted = c.Boolean(nullable: false),
                         Name = c.String(),
                         CreatedDate = c.DateTime(nullable: false),
@@ -25,7 +64,7 @@ namespace BanHang.Migrations
                 "dbo.Customers",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Gender = c.Int(nullable: false),
                         Address = c.String(),
                         PhoneNumber = c.String(),
@@ -37,7 +76,7 @@ namespace BanHang.Migrations
                         LastUpdatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         LastUpdatedBy = c.Int(nullable: false),
-                        Group_Id = c.Guid(),
+                        Group_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.CustomerGroups", t => t.Group_Id)
@@ -47,24 +86,9 @@ namespace BanHang.Migrations
                 "dbo.CustomerGroups",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Note = c.String(),
                         DiscountPercent = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        Name = c.String(),
-                        CreatedDate = c.DateTime(nullable: false),
-                        LastUpdatedDate = c.DateTime(nullable: false),
-                        CreatedBy = c.Int(nullable: false),
-                        LastUpdatedBy = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Employee",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        JobTitle = c.String(),
                         IsDeleted = c.Boolean(nullable: false),
                         Name = c.String(),
                         CreatedDate = c.DateTime(nullable: false),
@@ -78,7 +102,7 @@ namespace BanHang.Migrations
                 "dbo.Invoices",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         DiscountPercent = c.Int(nullable: false),
                         Price = c.Int(nullable: false),
                         RetailPrice = c.Int(nullable: false),
@@ -89,13 +113,13 @@ namespace BanHang.Migrations
                         LastUpdatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         LastUpdatedBy = c.Int(nullable: false),
-                        Customer_Id = c.Guid(),
-                        Employee_Id = c.Guid(),
-                        Production_Id = c.Guid(),
+                        Customer_Id = c.Int(),
+                        Employee_Id = c.Int(),
+                        Production_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customers", t => t.Customer_Id)
-                .ForeignKey("dbo.Employee", t => t.Employee_Id)
+                .ForeignKey("dbo.Employees", t => t.Employee_Id)
                 .ForeignKey("dbo.Productions", t => t.Production_Id)
                 .Index(t => t.Customer_Id)
                 .Index(t => t.Employee_Id)
@@ -105,7 +129,7 @@ namespace BanHang.Migrations
                 "dbo.Productions",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         RetailPrice = c.Int(nullable: false),
                         WholesalePrice = c.Int(nullable: false),
                         OriginPrice = c.Int(nullable: false),
@@ -118,8 +142,8 @@ namespace BanHang.Migrations
                         LastUpdatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         LastUpdatedBy = c.Int(nullable: false),
-                        Brand_Id = c.Guid(),
-                        Category_Id = c.Guid(),
+                        Brand_Id = c.Int(),
+                        Category_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Brands", t => t.Brand_Id)
@@ -131,7 +155,7 @@ namespace BanHang.Migrations
                 "dbo.CategoryProducts",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Description = c.String(),
                         IsDeleted = c.Boolean(nullable: false),
                         Name = c.String(),
@@ -146,7 +170,7 @@ namespace BanHang.Migrations
                 "dbo.Orders",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Quantity = c.Int(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                         Name = c.String(),
@@ -154,31 +178,44 @@ namespace BanHang.Migrations
                         LastUpdatedDate = c.DateTime(nullable: false),
                         CreatedBy = c.Int(nullable: false),
                         LastUpdatedBy = c.Int(nullable: false),
-                        Customer_Id = c.Guid(),
-                        Employee_Id = c.Guid(),
-                        Production_Id = c.Guid(),
+                        Customer_Id = c.Int(),
+                        Employee_Id = c.Int(),
+                        Production_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customers", t => t.Customer_Id)
-                .ForeignKey("dbo.Employee", t => t.Employee_Id)
+                .ForeignKey("dbo.Employees", t => t.Employee_Id)
                 .ForeignKey("dbo.Productions", t => t.Production_Id)
                 .Index(t => t.Customer_Id)
                 .Index(t => t.Employee_Id)
                 .Index(t => t.Production_Id);
             
+            CreateTable(
+                "dbo.Admins",
+                c => new
+                    {
+                        Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Employees", t => t.Id)
+                .Index(t => t.Id);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Admins", "Id", "dbo.Employees");
             DropForeignKey("dbo.Orders", "Production_Id", "dbo.Productions");
-            DropForeignKey("dbo.Orders", "Employee_Id", "dbo.Employee");
+            DropForeignKey("dbo.Orders", "Employee_Id", "dbo.Employees");
             DropForeignKey("dbo.Orders", "Customer_Id", "dbo.Customers");
             DropForeignKey("dbo.Invoices", "Production_Id", "dbo.Productions");
             DropForeignKey("dbo.Productions", "Category_Id", "dbo.CategoryProducts");
             DropForeignKey("dbo.Productions", "Brand_Id", "dbo.Brands");
-            DropForeignKey("dbo.Invoices", "Employee_Id", "dbo.Employee");
+            DropForeignKey("dbo.Invoices", "Employee_Id", "dbo.Employees");
             DropForeignKey("dbo.Invoices", "Customer_Id", "dbo.Customers");
             DropForeignKey("dbo.Customers", "Group_Id", "dbo.CustomerGroups");
+            DropForeignKey("dbo.Authentications", "Employee_Id", "dbo.Employees");
+            DropIndex("dbo.Admins", new[] { "Id" });
             DropIndex("dbo.Orders", new[] { "Production_Id" });
             DropIndex("dbo.Orders", new[] { "Employee_Id" });
             DropIndex("dbo.Orders", new[] { "Customer_Id" });
@@ -188,14 +225,17 @@ namespace BanHang.Migrations
             DropIndex("dbo.Invoices", new[] { "Employee_Id" });
             DropIndex("dbo.Invoices", new[] { "Customer_Id" });
             DropIndex("dbo.Customers", new[] { "Group_Id" });
+            DropIndex("dbo.Authentications", new[] { "Employee_Id" });
+            DropTable("dbo.Admins");
             DropTable("dbo.Orders");
             DropTable("dbo.CategoryProducts");
             DropTable("dbo.Productions");
             DropTable("dbo.Invoices");
-            DropTable("dbo.Employee");
             DropTable("dbo.CustomerGroups");
             DropTable("dbo.Customers");
             DropTable("dbo.Brands");
+            DropTable("dbo.Authentications");
+            DropTable("dbo.Employees");
         }
     }
 }
