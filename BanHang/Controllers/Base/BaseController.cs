@@ -1,18 +1,17 @@
 ﻿using BanHang.Business.Logic.Common;
 using BanHang.Converter.Base;
+using BanHang.Exceptions;
 using BanHang.Models.Communication.Request.Base;
 using BanHang.Models.Dto.Base;
 using BanHang.Models.ServiceModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace BanHang.Controllers.Base
 {
-	public abstract class BaseController<Request,Model, Dto> : ApiController where Request : BaseRequest where Model : BaseModel where Dto: BaseDto
+	public abstract class BaseController<Model, Dto> : ApiController where Model : BaseModel where Dto: BaseDto
 	{
 		protected BaseRepository<Model> repository;
 		protected UnitOfWork UnitOfWork;
@@ -24,29 +23,42 @@ namespace BanHang.Controllers.Base
 			repository = new BaseRepository<Model>(UnitOfWork);
 		}
 
-		public virtual IHttpActionResult Get()
+		protected virtual List<Dto> GetAll()
 		{
-			return Ok(repository.All().Select(x => Converter.ModelToDto(x)).ToList());
+			return repository.GetAll().Select(x => Converter.ModelToDto(x)).ToList();
 		}
 
-		public virtual IHttpActionResult Get(int id)
+		protected virtual Dto Get(int id)
 		{
-			return Ok(Converter.ModelToDto(repository.FindOne(id)));
+			return Converter.ModelToDto(repository.FindOne(id));
 		}
 
-		public virtual IHttpActionResult Post([FromBody]Request request)
+		protected virtual Dto Post(Dto dtoObj)
 		{
-			return Ok(repository.Create(Converter.DtoToModel((Dto)request.BaseDto)));
+			return Converter.ModelToDto(repository.Create(Converter.DtoToModel(dtoObj, null)));
 		}
 
-		public virtual IHttpActionResult Delete([FromBody]Request request)
+		protected virtual int Delete(int id)
 		{
-			return Ok(repository.Delete(Converter.DtoToModel((Dto)request.BaseDto)));
+			var model = repository.FindOne(id);
+			if (model == null)
+			{
+				throw new NotFoundException();
+			}
+			return repository.Delete(model);
 		}
 
-		public virtual IHttpActionResult Put([FromBody]Request request)
+		protected virtual int Put(int id, Dto dtoObj)
 		{
-			return Ok(repository.Update(Converter.DtoToModel((Dto)request.BaseDto)));
+			var model = repository.FindOne(id);
+			if (model == null)
+			{
+				throw new NotFoundException();
+			}
+			Converter.DtoToModel(dtoObj, model);
+			model.Id = id;
+
+			return repository.Update(model);
 		}
 
 		protected IHttpActionResult ExecuteAction(Action action)
@@ -69,8 +81,9 @@ namespace BanHang.Controllers.Base
 			{
 				return action();
 			}
-			catch
+			catch(Exception ex)
 			{
+				Console.WriteLine(ex.Message);
 				return StatusCode(System.Net.HttpStatusCode.Unauthorized);
 			}
 		}

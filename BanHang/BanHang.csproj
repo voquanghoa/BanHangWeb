@@ -214,8 +214,10 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Converter\Base\BaseConverter.cs" />
+    <Compile Include="Converter\UserConverter.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,9 +228,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
     <Compile Include="Models\Communication\Request\LoginForm.cs" />
+    <Compile Include="Models\Communication\Request\RequestUser.cs" />
     <Compile Include="Models\Communication\Response\Base\BaseResponse.cs" />
     <Compile Include="Models\Communication\Response\LoginResponse.cs" />
+    <Compile Include="Models\Communication\Response\ResponseUser.cs" />
     <Compile Include="Models\Dto\Base\BaseDto.cs" />
+    <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\ServiceModel\Authentication.cs" />
     <Compile Include="Models\ServiceModel\Base\BaseModel.cs" />
     <Compile Include="Models\ServiceModel\Base\ContactModel.cs" />
@@ -238,7 +243,7 @@
     <Compile Include="Models\ServiceModel\Customer.cs" />
     <Compile Include="Models\ServiceModel\CustomerGroup.cs" />
     <Compile Include="Models\ServiceModel\Employee.cs" />
-    <Compile Include="Models\ServiceModel\Base\Gener.cs" />
+    <Compile Include="Models\ServiceModel\Base\Gender.cs" />
     <Compile Include="Models\ServiceModel\Invoice.cs" />
     <Compile Include="Models\ServiceModel\Order.cs" />
     <Compile Include="Models\ServiceModel\Production.cs" />
@@ -304,7 +309,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

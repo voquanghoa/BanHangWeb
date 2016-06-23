@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BanHang.Models.ServiceModel
+namespace BanHang.Exceptions
 {
-	public enum Gener
+	public class NotFoundException : Exception
 	{
-		Male = 1,
-		Famale = 2,
-		Other = 3
 	}
 }

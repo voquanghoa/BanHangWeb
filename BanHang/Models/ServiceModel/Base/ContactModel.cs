@@ -7,7 +7,7 @@ namespace BanHang.Models.ServiceModel.Base
 {
 	public class ContactModel : StoreModel
 	{
-		public Gener Gender { get; set; }
+		public Gender Gender { get; set; }
 
 		public string Address { get; set; }
 

@@ -12,8 +12,5 @@ namespace BanHang.Models.Communication.Request.Base
 	{
 		[DataMember(Name = "authentication")]
 		public Guid? Authentication { get; set; }
-
-		[DataMember(Name = "data")]
-		public virtual BaseDto BaseDto { set; get; }
 	}
 }
