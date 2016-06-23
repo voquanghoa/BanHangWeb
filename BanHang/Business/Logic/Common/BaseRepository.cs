@@ -125,7 +125,7 @@ namespace BanHang.Business.Logic.Common
 		public virtual T Create(T TObject)
 		{
 			var newEntry = dbSet.Add(TObject);
-
+			newEntry.CreatedDate = newEntry.LastUpdatedDate = DateTime.Now;
 			unitOfWork.DbContext.SaveChanges();
 
 			return newEntry;
@@ -152,6 +152,7 @@ namespace BanHang.Business.Logic.Common
 		public virtual int Update(T TObject)
 		{
 			dbSet.Attach(TObject);
+			TObject.LastUpdatedDate = DateTime.Now;
 			unitOfWork.DbContext.Entry(TObject).State = EntityState.Modified;
 			return unitOfWork.DbContext.SaveChanges();
 		}

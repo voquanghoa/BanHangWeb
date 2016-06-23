@@ -7,6 +7,7 @@ using System.Web;
 
 namespace BanHang.Models.Communication.Request.Base
 {
+	[DataContract]
 	public class BaseRequest
 	{
 		[DataMember(Name = "authentication")]

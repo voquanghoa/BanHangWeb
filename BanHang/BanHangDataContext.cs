@@ -18,7 +18,6 @@ namespace BanHang
 		public virtual DbSet<Invoice> Invoices { get; set; }
 		public virtual DbSet<Order> Orders { get; set; }
 		public virtual DbSet<Production> Productions { get; set; }
-		public virtual DbSet<Admin> Admins { set; get; }
 		public virtual DbSet<Authentication> Authentication { set; get; }
 	}
 }

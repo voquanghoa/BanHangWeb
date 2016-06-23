@@ -15,5 +15,7 @@ namespace BanHang.Models.ServiceModel
 		public string Password { get; set; }
 
 		public string JobTitle { get; set; }
+
+		public Role Role { get; set; }
 	}
 }

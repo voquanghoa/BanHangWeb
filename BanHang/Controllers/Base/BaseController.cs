@@ -12,16 +12,16 @@ using System.Web.Http.Description;
 
 namespace BanHang.Controllers.Base
 {
-	public abstract class BaseController<R,M, D> : ApiController where R : BaseRequest where M : BaseModel where D:BaseDto
+	public abstract class BaseController<Request,Model, Dto> : ApiController where Request : BaseRequest where Model : BaseModel where Dto: BaseDto
 	{
-		protected BaseRepository<M> repository;
+		protected BaseRepository<Model> repository;
 		protected UnitOfWork UnitOfWork;
-		protected BaseConverter<D, M> Converter;
+		protected BaseConverter<Dto, Model> Converter;
 
 		public BaseController()
 		{
 			UnitOfWork = new UnitOfWork();
-			repository = new BaseRepository<M>(UnitOfWork);
+			repository = new BaseRepository<Model>(UnitOfWork);
 		}
 
 		public virtual IHttpActionResult Get()
@@ -34,19 +34,19 @@ namespace BanHang.Controllers.Base
 			return Ok(Converter.ModelToDto(repository.FindOne(id)));
 		}
 
-		public virtual IHttpActionResult Post([FromBody]R request)
+		public virtual IHttpActionResult Post([FromBody]Request request)
 		{
-			return Ok(repository.Create(Converter.DtoToModel((D)request.BaseDto)));
+			return Ok(repository.Create(Converter.DtoToModel((Dto)request.BaseDto)));
 		}
 
-		public virtual IHttpActionResult Delete([FromBody]R request)
+		public virtual IHttpActionResult Delete([FromBody]Request request)
 		{
-			return Ok(repository.Delete(Converter.DtoToModel((D)request.BaseDto)));
+			return Ok(repository.Delete(Converter.DtoToModel((Dto)request.BaseDto)));
 		}
 
-		public virtual IHttpActionResult Put([FromBody]R request)
+		public virtual IHttpActionResult Put([FromBody]Request request)
 		{
-			return Ok(repository.Update(Converter.DtoToModel((D)request.BaseDto)));
+			return Ok(repository.Update(Converter.DtoToModel((Dto)request.BaseDto)));
 		}
 
 		protected IHttpActionResult ExecuteAction(Action action)
