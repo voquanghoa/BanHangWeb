@@ -19,14 +19,19 @@ namespace BanHang.Models.Dto
 		[DataMember(Name = "production_id")]
 		public int ProductionId { get; set; }
 
+		[DataMember(Name = "discount_percent")]
 		public int DiscountPercent { get; set; }
 
+		[DataMember(Name = "price")]
 		public int Price { get; set; }
 
+		[DataMember(Name = "retail_price")]
 		public int RetailPrice { get; set; }
 
+		[DataMember(Name = "description")]
 		public string Description { get; set; }
 
+		[DataMember(Name = "quantity")]
 		public int Quantity { get; set; }
 	}
 }

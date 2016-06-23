@@ -218,32 +218,30 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\CustomerGroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Converter\Base\BaseConverter.cs" />
     <Compile Include="Converter\CategoryProductConverter.cs" />
     <Compile Include="Converter\CustomerConverter.cs" />
     <Compile Include="Converter\CustomerGroupConverter.cs" />
+    <Compile Include="Converter\InvoiceConverter.cs" />
     <Compile Include="Converter\NameConverter.cs" />
     <Compile Include="Converter\ProductionConverter.cs" />
     <Compile Include="Converter\UserConverter.cs" />
+    <Compile Include="Exceptions\BadRequestException.cs" />
+    <Compile Include="Exceptions\ForbiddenException.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606231535596_UpdateInvoice.cs" />
-    <Compile Include="Migrations\201606231535596_UpdateInvoice.Designer.cs">
-      <DependentUpon>201606231535596_UpdateInvoice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606231538287_UpdateInvoic2.cs" />
-    <Compile Include="Migrations\201606231538287_UpdateInvoic2.Designer.cs">
-      <DependentUpon>201606231538287_UpdateInvoic2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
     <Compile Include="Models\Communication\Request\CategoryProductRequest.cs" />
     <Compile Include="Models\Communication\Request\CustomerGroupRequest.cs" />
     <Compile Include="Models\Communication\Request\CustomerRequest.cs" />
+    <Compile Include="Models\Communication\Request\InvoiceRequest.cs" />
     <Compile Include="Models\Communication\Request\LoginForm.cs" />
     <Compile Include="Models\Communication\Request\BrandRequest.cs" />
     <Compile Include="Models\Communication\Request\ProductionRequest.cs" />
@@ -255,6 +253,7 @@
     <Compile Include="Models\Dto\CategoryProductDto.cs" />
     <Compile Include="Models\Dto\CustomerDto.cs" />
     <Compile Include="Models\Dto\CustomerGroupDto.cs" />
+    <Compile Include="Models\Dto\InvoiceDto.cs" />
     <Compile Include="Models\Dto\NameDto.cs" />
     <Compile Include="Models\Dto\ProductionDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
@@ -340,14 +339,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606231535596_UpdateInvoice.resx">
-      <DependentUpon>201606231535596_UpdateInvoice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606231538287_UpdateInvoic2.resx">
-      <DependentUpon>201606231538287_UpdateInvoic2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

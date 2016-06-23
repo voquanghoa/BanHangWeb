@@ -30,7 +30,13 @@ namespace BanHang.Controllers.Base
 
 		protected virtual Dto BaseGet(int id)
 		{
-			return Converter.ModelToDto(repository.FindOne(id));
+			var model = repository.FindOne(id);
+			if(model == null)
+			{
+				throw new NotFoundException();
+			}
+
+			return Converter.ModelToDto(model);
 		}
 
 		protected virtual Dto BasePost(Dto dtoObj)
@@ -81,7 +87,27 @@ namespace BanHang.Controllers.Base
 			{
 				return action();
 			}
-			catch(Exception ex)
+			catch(NotFoundException ex)
+			{
+				Console.WriteLine(ex.Message);
+				return StatusCode(System.Net.HttpStatusCode.NotFound);
+			}
+			catch(ForbiddenException ex)
+			{
+				Console.WriteLine(ex.Message);
+				return StatusCode(System.Net.HttpStatusCode.Forbidden);
+			}
+			catch (UnauthorizedException ex)
+			{
+				Console.WriteLine(ex.Message);
+				return StatusCode(System.Net.HttpStatusCode.Unauthorized);
+			}
+			catch (BadRequestException ex)
+			{
+				Console.WriteLine(ex.Message);
+				return StatusCode(System.Net.HttpStatusCode.BadRequest);
+			}
+			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
 				return StatusCode(System.Net.HttpStatusCode.Unauthorized);
