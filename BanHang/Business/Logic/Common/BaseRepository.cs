@@ -138,7 +138,7 @@ namespace BanHang.Business.Logic.Common
 		/// <returns>1 if success, 0 if failed</returns>
 		public virtual int Delete(T TObject) 
 		{
-			if (TObject.GetType().Equals(typeof(StoreModel)))
+			if (TObject is StoreModel)
 			{
 				var storeObject = (StoreModel)(object)TObject;
 				storeObject.IsDeleted = true;

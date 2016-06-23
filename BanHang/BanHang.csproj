@@ -213,9 +213,11 @@
     <Compile Include="Business\Logic\EmployeeRepository.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Converter\Base\BaseConverter.cs" />
+    <Compile Include="Converter\NameConverter.cs" />
     <Compile Include="Converter\UserConverter.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Global.asax.cs">
@@ -228,11 +230,13 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
     <Compile Include="Models\Communication\Request\LoginForm.cs" />
+    <Compile Include="Models\Communication\Request\BrandRequest.cs" />
     <Compile Include="Models\Communication\Request\RequestUser.cs" />
     <Compile Include="Models\Communication\Response\Base\BaseResponse.cs" />
     <Compile Include="Models\Communication\Response\LoginResponse.cs" />
     <Compile Include="Models\Communication\Response\ResponseUser.cs" />
     <Compile Include="Models\Dto\Base\BaseDto.cs" />
+    <Compile Include="Models\Dto\NameDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\ServiceModel\Authentication.cs" />
     <Compile Include="Models\ServiceModel\Base\BaseModel.cs" />
