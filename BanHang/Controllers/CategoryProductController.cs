@@ -21,25 +21,25 @@ namespace BanHang.Controllers
 
 		public IHttpActionResult Get()
 		{
-			return ExecuteAction(() => Ok(base.GetAll()));
+			return ExecuteAction(() => Ok(base.BaseGetAll()));
 		}
 
 		[ResponseType(typeof(Brand))]
 		public IHttpActionResult Post([FromBody]CategoryProductRequest request)
 		{
-			return ExecuteAction(() => Ok(base.Post(request.CategoryProduct)));
+			return ExecuteAction(() => Ok(base.BasePost(request.Data)));
 		}
 
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Put([FromBody]CategoryProductRequest request)
 		{
-			return ExecuteAction(() => Ok(base.Put(request.Id, request.CategoryProduct)));
+			return ExecuteAction(() => Ok(base.BasePut(request.Id, request.Data)));
 		}
 
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Delete([FromBody]BrandRequest request)
 		{
-			return ExecuteAction(() => Ok(base.Delete(request.Id)));
+			return ExecuteAction(() => Ok(base.BaseDelete(request.Id)));
 		}
 	}
 }

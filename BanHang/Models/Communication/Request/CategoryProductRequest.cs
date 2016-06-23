@@ -10,8 +10,8 @@ namespace BanHang.Models.Communication.Request
 	[DataContract]
 	public class CategoryProductRequest
 	{
-		[DataMember(Name = "category_product")]
-		public CategoryProductDto CategoryProduct { get; set; }
+		[DataMember(Name = "data")]
+		public CategoryProductDto Data { get; set; }
 
 		[DataMember(Name = "id")]
 		public int Id { get; set; }

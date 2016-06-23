@@ -10,8 +10,8 @@ namespace BanHang.Models.Communication.Request
 {
 	public class BrandRequest : BaseRequest
 	{
-		[DataMember(Name ="brand")]
-		public NameDto Brand { get; set; }
+		[DataMember(Name ="data")]
+		public NameDto Data { get; set; }
 
 		[DataMember(Name = "id")]
 		public int Id { get; set; }

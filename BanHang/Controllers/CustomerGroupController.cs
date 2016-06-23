@@ -1,7 +1,6 @@
 ﻿using BanHang.Controllers.Base;
 using BanHang.Converter;
 using BanHang.Models.Communication.Request;
-using BanHang.Models.Communication.Response;
 using BanHang.Models.Dto;
 using BanHang.Models.ServiceModel;
 using System;
@@ -13,11 +12,11 @@ using System.Web.Http.Description;
 
 namespace BanHang.Controllers
 {
-	public class UserController : BaseController<Employee, UserDto>
+	public class CustomerGroupController : BaseController<CustomerGroup, CustomerGroupDto>
 	{
-		public UserController():base()
+		public CustomerGroupController():base()
 		{
-			Converter = new UserConverter();
+			this.Converter = new CustomerGroupConverter();
 		}
 
 		public IHttpActionResult Get()
@@ -25,20 +24,26 @@ namespace BanHang.Controllers
 			return ExecuteAction(() => Ok(base.BaseGetAll()));
 		}
 
-		[ResponseType(typeof(UserDto))]
-		public IHttpActionResult Post([FromBody]RequestUser request)
+		[ResponseType(typeof(CustomerGroupDto))]
+		public IHttpActionResult Get(int id)
+		{
+			return ExecuteAction(() => Ok(base.BaseGet(id)));
+		}
+
+		[ResponseType(typeof(CustomerGroupDto))]
+		public IHttpActionResult Post([FromBody]CustomerGroupRequest request)
 		{
 			return ExecuteAction(() => Ok(base.BasePost(request.Data)));
 		}
 
 		[ResponseType(typeof(int))]
-		public IHttpActionResult Put([FromBody]RequestUser request)
+		public IHttpActionResult Put([FromBody]CustomerGroupRequest request)
 		{
 			return ExecuteAction(() => Ok(base.BasePut(request.Id, request.Data)));
 		}
 
 		[ResponseType(typeof(int))]
-		public IHttpActionResult Delete([FromBody]RequestUser request)
+		public IHttpActionResult Delete([FromBody]CustomerGroupRequest request)
 		{
 			return ExecuteAction(() => Ok(base.BaseDelete(request.Id)));
 		}

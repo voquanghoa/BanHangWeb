@@ -23,22 +23,22 @@ namespace BanHang.Controllers.Base
 			repository = new BaseRepository<Model>(UnitOfWork);
 		}
 
-		protected virtual List<Dto> GetAll()
+		protected virtual List<Dto> BaseGetAll()
 		{
 			return repository.GetAll().Select(x => Converter.ModelToDto(x)).ToList();
 		}
 
-		protected virtual Dto Get(int id)
+		protected virtual Dto BaseGet(int id)
 		{
 			return Converter.ModelToDto(repository.FindOne(id));
 		}
 
-		protected virtual Dto Post(Dto dtoObj)
+		protected virtual Dto BasePost(Dto dtoObj)
 		{
 			return Converter.ModelToDto(repository.Create(Converter.DtoToModel(dtoObj, null)));
 		}
 
-		protected virtual int Delete(int id)
+		protected virtual int BaseDelete(int id)
 		{
 			var model = repository.FindOne(id);
 			if (model == null)
@@ -48,7 +48,7 @@ namespace BanHang.Controllers.Base
 			return repository.Delete(model);
 		}
 
-		protected virtual int Put(int id, Dto dtoObj)
+		protected virtual int BasePut(int id, Dto dtoObj)
 		{
 			var model = repository.FindOne(id);
 			if (model == null)
