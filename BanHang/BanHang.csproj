@@ -233,9 +233,9 @@
     <Compile Include="Migrations\201606231201480_init.Designer.cs">
       <DependentUpon>201606231201480_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606231453266_Update.cs" />
-    <Compile Include="Migrations\201606231453266_Update.Designer.cs">
-      <DependentUpon>201606231453266_Update.cs</DependentUpon>
+    <Compile Include="Migrations\201606231516045_UpdatePro.cs" />
+    <Compile Include="Migrations\201606231516045_UpdatePro.Designer.cs">
+      <DependentUpon>201606231516045_UpdatePro.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
@@ -253,6 +253,7 @@
     <Compile Include="Models\Dto\CustomerDto.cs" />
     <Compile Include="Models\Dto\CustomerGroupDto.cs" />
     <Compile Include="Models\Dto\NameDto.cs" />
+    <Compile Include="Models\Dto\ProductionDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\ServiceModel\Authentication.cs" />
     <Compile Include="Models\ServiceModel\Base\BaseModel.cs" />
@@ -342,8 +343,8 @@
     <EmbeddedResource Include="Migrations\201606231201480_init.resx">
       <DependentUpon>201606231201480_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606231453266_Update.resx">
-      <DependentUpon>201606231453266_Update.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606231516045_UpdatePro.resx">
+      <DependentUpon>201606231516045_UpdatePro.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
