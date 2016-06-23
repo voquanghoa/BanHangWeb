@@ -148,7 +148,6 @@ namespace BanHang.Business.Logic.Common
 			return unitOfWork.DbContext.SaveChanges();
 		}
 
-
 		public virtual int Update(T TObject)
 		{
 			dbSet.Attach(TObject);

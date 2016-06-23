@@ -214,9 +214,11 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
+    <Compile Include="Controllers\CategoryProductController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Converter\Base\BaseConverter.cs" />
+    <Compile Include="Converter\CategoryProductConverter.cs" />
     <Compile Include="Converter\NameConverter.cs" />
     <Compile Include="Converter\UserConverter.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
@@ -229,6 +231,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
+    <Compile Include="Models\Communication\Request\CategoryProductRequest.cs" />
     <Compile Include="Models\Communication\Request\LoginForm.cs" />
     <Compile Include="Models\Communication\Request\BrandRequest.cs" />
     <Compile Include="Models\Communication\Request\RequestUser.cs" />
@@ -236,6 +239,7 @@
     <Compile Include="Models\Communication\Response\LoginResponse.cs" />
     <Compile Include="Models\Communication\Response\ResponseUser.cs" />
     <Compile Include="Models\Dto\Base\BaseDto.cs" />
+    <Compile Include="Models\Dto\CategoryProductDto.cs" />
     <Compile Include="Models\Dto\NameDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\ServiceModel\Authentication.cs" />
