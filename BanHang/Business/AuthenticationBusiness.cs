@@ -1,6 +1,7 @@
 ﻿using BanHang.Business.Logic;
 using BanHang.Business.Logic.Common;
 using BanHang.Models.Communication.Request;
+using BanHang.Models.Communication.Response;
 using BanHang.Models.ServiceModel;
 using BanHang.Utils;
 using System;
@@ -30,7 +31,6 @@ namespace BanHang.Business
 			{
 				var sessonGuid = Guid.Parse(sessonHashCookie);
 				authenticationRepository.Delete(x => x.SessionCode == sessonGuid);
-				CookieUtil.ClearCookie();
 				return 1;
 			}
 			else
@@ -59,7 +59,7 @@ namespace BanHang.Business
 			return GetCurrentLoggedInUser() != null;
 		}
 
-		public int Authenticate(LoginForm loginForm)
+		public LoginResponse Authenticate(LoginForm loginForm)
 		{
 			var employee = employeeRepository.FindOne(x => x.LoginName == loginForm.UserName && x.Password == loginForm.Password);
 
@@ -74,10 +74,13 @@ namespace BanHang.Business
 				Employee = employee
 			};
 
-			CookieUtil.SetCookie(SessonHashCookieName, authentication.SessionCode.ToString());
 			authenticationRepository.Create(authentication);
 
-			return 1;
+			return new LoginResponse()
+			{
+				Authentication = authentication.SessionCode,
+				Role = employee.Role
+			};
 		}
 	}
 }

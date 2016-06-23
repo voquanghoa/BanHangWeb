@@ -1,6 +1,7 @@
 ﻿using BanHang.Business;
 using BanHang.Controllers.Base;
 using BanHang.Models.Communication.Request;
+using BanHang.Models.Communication.Response;
 using BanHang.Models.Dto.Base;
 using BanHang.Models.ServiceModel;
 using System.Web.Http;
@@ -27,7 +28,7 @@ namespace BanHang.Controllers
 			return BadRequest();
 		}
 
-		[ResponseType(typeof(int))]
+		[ResponseType(typeof(LoginResponse))]
 		public override IHttpActionResult Post([FromBody]LoginForm request)
 		{
 			return ExecuteAction(()=>Ok(authenticationBussiness.Authenticate(request)));

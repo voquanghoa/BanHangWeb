@@ -226,6 +226,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
     <Compile Include="Models\Communication\Request\LoginForm.cs" />
+    <Compile Include="Models\Communication\Response\Base\BaseResponse.cs" />
+    <Compile Include="Models\Communication\Response\LoginResponse.cs" />
     <Compile Include="Models\Dto\Base\BaseDto.cs" />
     <Compile Include="Models\ServiceModel\Authentication.cs" />
     <Compile Include="Models\ServiceModel\Base\BaseModel.cs" />
