@@ -24,22 +24,28 @@ namespace BanHang.Controllers
 			return ExecuteAction(() => Ok(base.BaseGetAll()));
 		}
 
+		[ResponseType(typeof(CategoryProductDto))]
+		public IHttpActionResult Get(int id)
+		{
+			return ExecuteAction(() => Ok(base.BaseGet(id)));
+		}
+
 		[ResponseType(typeof(Brand))]
 		public IHttpActionResult Post([FromBody]CategoryProductRequest request)
 		{
-			return ExecuteAction(() => Ok(base.BasePost(request.Data)));
+			return ExecuteAction(() => Ok(base.BasePost(request.Data, request.Authentication)));
 		}
 
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Put([FromBody]CategoryProductRequest request)
 		{
-			return ExecuteAction(() => Ok(base.BasePut(request.Id, request.Data)));
+			return ExecuteAction(() => Ok(base.BasePut(request.Id, request.Data, request.Authentication)));
 		}
 
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Delete([FromBody]BrandRequest request)
 		{
-			return ExecuteAction(() => Ok(base.BaseDelete(request.Id)));
+			return ExecuteAction(() => Ok(base.BaseDelete(request.Id, request.Authentication)));
 		}
 	}
 }

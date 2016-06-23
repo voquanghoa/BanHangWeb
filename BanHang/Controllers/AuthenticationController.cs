@@ -27,7 +27,7 @@ namespace BanHang.Controllers
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Delete([FromBody]LoginForm request)
 		{
-			return ExecuteAction(() => Ok(authenticationBussiness.Logout()));
+			return ExecuteAction(() => Ok(authenticationBussiness.Logout(request.Authentication)));
 		}
 	}
 }

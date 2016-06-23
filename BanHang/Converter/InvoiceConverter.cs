@@ -40,7 +40,8 @@ namespace BanHang.Converter
 				Price = model.Price,
 				ProductionId = ConverToInt(model.ProductionId),
 				Quantity = model.Quantity,
-				RetailPrice = model.RetailPrice
+				RetailPrice = model.RetailPrice,
+				Id = model.Id
 			};
 		}
 	}

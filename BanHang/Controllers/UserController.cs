@@ -26,21 +26,27 @@ namespace BanHang.Controllers
 		}
 
 		[ResponseType(typeof(UserDto))]
+		public IHttpActionResult Get(int id)
+		{
+			return ExecuteAction(() => Ok(base.BaseGet(id)));
+		}
+
+		[ResponseType(typeof(UserDto))]
 		public IHttpActionResult Post([FromBody]RequestUser request)
 		{
-			return ExecuteAction(() => Ok(base.BasePost(request.Data)));
+			return ExecuteAction(() => Ok(base.BasePost(request.Data, request.Authentication)));
 		}
 
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Put([FromBody]RequestUser request)
 		{
-			return ExecuteAction(() => Ok(base.BasePut(request.Id, request.Data)));
+			return ExecuteAction(() => Ok(base.BasePut(request.Id, request.Data, request.Authentication)));
 		}
 
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Delete([FromBody]RequestUser request)
 		{
-			return ExecuteAction(() => Ok(base.BaseDelete(request.Id)));
+			return ExecuteAction(() => Ok(base.BaseDelete(request.Id, request.Authentication)));
 		}
 	}
 }

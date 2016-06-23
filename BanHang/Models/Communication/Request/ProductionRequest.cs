@@ -1,4 +1,5 @@
-﻿using BanHang.Models.Dto;
+﻿using BanHang.Models.Communication.Request.Base;
+using BanHang.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web;
 namespace BanHang.Models.Communication.Request
 {
 	[DataContract]
-	public class ProductionRequest
+	public class ProductionRequest : BaseRequest
 	{
 		[DataMember(Name = "data")]
 		public ProductionDto Data { get; set; }

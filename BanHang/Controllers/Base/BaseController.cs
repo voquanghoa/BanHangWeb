@@ -1,8 +1,10 @@
-﻿using BanHang.Business.Logic.Common;
+﻿using BanHang.Business;
+using BanHang.Business.Logic.Common;
 using BanHang.Converter.Base;
 using BanHang.Exceptions;
 using BanHang.Models.Communication.Request.Base;
 using BanHang.Models.Dto.Base;
+using BanHang.Models.ServiceModel;
 using BanHang.Models.ServiceModel.Base;
 using System;
 using System.Collections.Generic;
@@ -16,11 +18,13 @@ namespace BanHang.Controllers.Base
 		protected BaseRepository<Model> repository;
 		protected UnitOfWork UnitOfWork;
 		protected BaseConverter<Dto, Model> Converter;
+		private AuthenticationBusiness authenticationBusiness;
 
 		public BaseController()
 		{
 			UnitOfWork = new UnitOfWork();
 			repository = new BaseRepository<Model>(UnitOfWork);
+			authenticationBusiness = new AuthenticationBusiness(UnitOfWork);
 		}
 
 		protected virtual List<Dto> BaseGetAll()
@@ -39,13 +43,16 @@ namespace BanHang.Controllers.Base
 			return Converter.ModelToDto(model);
 		}
 
-		protected virtual Dto BasePost(Dto dtoObj)
+		protected virtual Dto BasePost(Dto dtoObj, Guid? authentcation)
 		{
+			RequireLogin(authentcation);
 			return Converter.ModelToDto(repository.Create(Converter.DtoToModel(dtoObj, null)));
 		}
 
-		protected virtual int BaseDelete(int id)
+		protected virtual int BaseDelete(int id, Guid? authentcation)
 		{
+			RequireAdmin(RequireLogin(authentcation));
+
 			var model = repository.FindOne(id);
 			if (model == null)
 			{
@@ -54,8 +61,10 @@ namespace BanHang.Controllers.Base
 			return repository.Delete(model);
 		}
 
-		protected virtual int BasePut(int id, Dto dtoObj)
+		protected virtual int BasePut(int id, Dto dtoObj, Guid? authentcation)
 		{
+			RequireLogin(authentcation);
+
 			var model = repository.FindOne(id);
 			if (model == null)
 			{
@@ -76,6 +85,23 @@ namespace BanHang.Controllers.Base
 			});
 		}
 
+		private Employee RequireLogin(Guid? authentcation)
+		{
+			var employee = authenticationBusiness.GetUser(authentcation);
+			if (employee == null)
+			{
+				throw new UnauthorizedException();
+			}
+			return employee;
+		}
+
+		private void RequireAdmin(Employee employee)
+		{
+			if(employee.Role!= Role.Admin)
+			{
+				throw new ForbiddenException();
+			}
+		}
 		/// <summary>
 		/// Execute a specific action
 		/// </summary>

@@ -1,5 +1,6 @@
 ﻿using BanHang.Business.Logic;
 using BanHang.Business.Logic.Common;
+using BanHang.Exceptions;
 using BanHang.Models.Communication.Request;
 using BanHang.Models.Communication.Response;
 using BanHang.Models.ServiceModel;
@@ -14,7 +15,7 @@ namespace BanHang.Business
 {
 	public class AuthenticationBusiness
 	{
-		private const string SessonHashCookieName = "SESSONHASH";
+		
 		private readonly EmployeeRepository employeeRepository;
 		private readonly AuthenticationRepository authenticationRepository;
 
@@ -24,13 +25,11 @@ namespace BanHang.Business
 			authenticationRepository = new AuthenticationRepository(unitOfWork);
 		}
 
-		public int Logout()
+		public int Logout(Guid? authentication)
 		{
-			var sessonHashCookie = CookieUtil.GetCookie(SessonHashCookieName);
-			if (sessonHashCookie != null)
+			if (authentication.HasValue)
 			{
-				var sessonGuid = Guid.Parse(sessonHashCookie);
-				authenticationRepository.Delete(x => x.SessionCode == sessonGuid);
+				authenticationRepository.Delete(x => x.SessionCode == authentication.Value);
 				return 1;
 			}
 			else
@@ -39,13 +38,11 @@ namespace BanHang.Business
 			}
 		}
 
-		private Employee GetCurrentLoggedInUser()
+		public Employee GetUser(Guid? authentication)
 		{
-			var sessonHashCookie = CookieUtil.GetCookie(SessonHashCookieName);
-			if (sessonHashCookie != null)
+			if (authentication.HasValue)
 			{
-				var sessonGuid = Guid.Parse(sessonHashCookie);
-				var sesson = authenticationRepository.FindOne(x => x.SessionCode == sessonGuid, new[] { "User" });
+				var sesson = authenticationRepository.FindOne(x => x.SessionCode == authentication.Value, new[] { "Employee" });
 				if (sesson != null)
 				{
 					return sesson.Employee;
@@ -54,18 +51,13 @@ namespace BanHang.Business
 			return null;
 		}
 
-		public bool IsUserLoggedIn()
-		{
-			return GetCurrentLoggedInUser() != null;
-		}
-
 		public LoginResponse Authenticate(LoginForm loginForm)
 		{
 			var employee = employeeRepository.FindOne(x => x.LoginName == loginForm.UserName && x.Password == loginForm.Password);
 
 			if (employee == null)
 			{
-				throw new HttpException(401, "Unauthorized access");
+				throw new UnauthorizedException();
 			}
 
 			var authentication = new Authentication()

@@ -33,19 +33,19 @@ namespace BanHang.Controllers
 		[ResponseType(typeof(CustomerGroupDto))]
 		public IHttpActionResult Post([FromBody]CustomerGroupRequest request)
 		{
-			return ExecuteAction(() => Ok(base.BasePost(request.Data)));
+			return ExecuteAction(() => Ok(base.BasePost(request.Data, request.Authentication)));
 		}
 
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Put([FromBody]CustomerGroupRequest request)
 		{
-			return ExecuteAction(() => Ok(base.BasePut(request.Id, request.Data)));
+			return ExecuteAction(() => Ok(base.BasePut(request.Id, request.Data, request.Authentication)));
 		}
 
 		[ResponseType(typeof(int))]
 		public IHttpActionResult Delete([FromBody]CustomerGroupRequest request)
 		{
-			return ExecuteAction(() => Ok(base.BaseDelete(request.Id)));
+			return ExecuteAction(() => Ok(base.BaseDelete(request.Id, request.Authentication)));
 		}
 	}
 }

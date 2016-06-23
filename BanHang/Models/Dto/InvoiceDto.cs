@@ -10,6 +10,9 @@ namespace BanHang.Models.Dto
 	[DataContract]
 	public class InvoiceDto : BaseDto
 	{
+		[DataMember(Name = "id")]
+		public int Id { get; set; }
+
 		[DataMember(Name = "customer_id")]
 		public int CustomerId { get; set; }
 
