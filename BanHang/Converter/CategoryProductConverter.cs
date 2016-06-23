@@ -10,7 +10,7 @@ namespace BanHang.Converter
 {
 	public class CategoryProductConverter : BaseConverter<CategoryProductDto, CategoryProduct>
 	{
-		public CategoryProduct DtoToModel(CategoryProductDto dto, CategoryProduct model = null)
+		public override CategoryProduct DtoToModel(CategoryProductDto dto, CategoryProduct model = null)
 		{
 			if (model == null)
 			{
@@ -21,7 +21,7 @@ namespace BanHang.Converter
 			return model;
 		}
 
-		public CategoryProductDto ModelToDto(CategoryProduct model)
+		public override CategoryProductDto ModelToDto(CategoryProduct model)
 		{
 			return new CategoryProductDto()
 			{

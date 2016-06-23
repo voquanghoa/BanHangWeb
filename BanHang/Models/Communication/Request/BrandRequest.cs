@@ -8,6 +8,7 @@ using System.Web;
 
 namespace BanHang.Models.Communication.Request
 {
+	[DataContract]
 	public class BrandRequest : BaseRequest
 	{
 		[DataMember(Name ="data")]

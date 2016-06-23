@@ -10,7 +10,7 @@ namespace BanHang.Converter
 {
 	public class CustomerGroupConverter : BaseConverter<CustomerGroupDto, CustomerGroup>
 	{
-		public CustomerGroup DtoToModel(CustomerGroupDto dto, CustomerGroup model = null)
+		public override CustomerGroup DtoToModel(CustomerGroupDto dto, CustomerGroup model = null)
 		{
 			if (model == null)
 			{
@@ -23,7 +23,7 @@ namespace BanHang.Converter
 			return model;
 		}
 
-		public CustomerGroupDto ModelToDto(CustomerGroup model)
+		public override CustomerGroupDto ModelToDto(CustomerGroup model)
 		{
 			return new CustomerGroupDto()
 			{

@@ -8,9 +8,14 @@ using System.Web;
 
 namespace BanHang.Converter.Base
 {
-	public interface BaseConverter<Dto,Model> where Dto : BaseDto where Model : BaseModel
+	public abstract class BaseConverter<Dto,Model> where Dto : BaseDto where Model : BaseModel
 	{
-		Dto ModelToDto(Model model);
-		Model DtoToModel(Dto dto, Model model=null);
+		public abstract Dto ModelToDto(Model model);
+		public abstract Model DtoToModel(Dto dto, Model model=null);
+
+		public int ConverToInt(int? value)
+		{
+			return value.HasValue ? value.Value : 0;
+		}
 	}
 }

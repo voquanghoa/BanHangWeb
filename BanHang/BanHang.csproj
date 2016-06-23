@@ -218,24 +218,26 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\CustomerGroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Converter\Base\BaseConverter.cs" />
     <Compile Include="Converter\CategoryProductConverter.cs" />
     <Compile Include="Converter\CustomerConverter.cs" />
     <Compile Include="Converter\CustomerGroupConverter.cs" />
     <Compile Include="Converter\NameConverter.cs" />
+    <Compile Include="Converter\ProductionConverter.cs" />
     <Compile Include="Converter\UserConverter.cs" />
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606231201480_init.cs" />
-    <Compile Include="Migrations\201606231201480_init.Designer.cs">
-      <DependentUpon>201606231201480_init.cs</DependentUpon>
+    <Compile Include="Migrations\201606231535596_UpdateInvoice.cs" />
+    <Compile Include="Migrations\201606231535596_UpdateInvoice.Designer.cs">
+      <DependentUpon>201606231535596_UpdateInvoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606231516045_UpdatePro.cs" />
-    <Compile Include="Migrations\201606231516045_UpdatePro.Designer.cs">
-      <DependentUpon>201606231516045_UpdatePro.cs</DependentUpon>
+    <Compile Include="Migrations\201606231538287_UpdateInvoic2.cs" />
+    <Compile Include="Migrations\201606231538287_UpdateInvoic2.Designer.cs">
+      <DependentUpon>201606231538287_UpdateInvoic2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="Models\Communication\Request\CustomerRequest.cs" />
     <Compile Include="Models\Communication\Request\LoginForm.cs" />
     <Compile Include="Models\Communication\Request\BrandRequest.cs" />
+    <Compile Include="Models\Communication\Request\ProductionRequest.cs" />
     <Compile Include="Models\Communication\Request\RequestUser.cs" />
     <Compile Include="Models\Communication\Response\Base\BaseResponse.cs" />
     <Compile Include="Models\Communication\Response\LoginResponse.cs" />
@@ -266,7 +269,6 @@
     <Compile Include="Models\ServiceModel\Employee.cs" />
     <Compile Include="Models\ServiceModel\Base\Gender.cs" />
     <Compile Include="Models\ServiceModel\Invoice.cs" />
-    <Compile Include="Models\ServiceModel\Order.cs" />
     <Compile Include="Models\ServiceModel\Production.cs" />
     <Compile Include="Models\ServiceModel\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -340,11 +342,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606231201480_init.resx">
-      <DependentUpon>201606231201480_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606231535596_UpdateInvoice.resx">
+      <DependentUpon>201606231535596_UpdateInvoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606231516045_UpdatePro.resx">
-      <DependentUpon>201606231516045_UpdatePro.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606231538287_UpdateInvoic2.resx">
+      <DependentUpon>201606231538287_UpdateInvoic2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

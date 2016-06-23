@@ -10,7 +10,7 @@ namespace BanHang.Converter
 {
 	public class NameConverter : BaseConverter<NameDto, Brand>
 	{
-		public Brand DtoToModel(NameDto dto, Brand model = null)
+		public override Brand DtoToModel(NameDto dto, Brand model = null)
 		{
 			if(model == null)
 			{
@@ -21,7 +21,7 @@ namespace BanHang.Converter
 			return model;
 		}
 
-		public NameDto ModelToDto(Brand model)
+		public override NameDto ModelToDto(Brand model)
 		{
 			return new NameDto()
 			{

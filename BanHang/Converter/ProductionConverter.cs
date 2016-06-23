@@ -10,7 +10,7 @@ namespace BanHang.Converter
 {
 	public class ProductionConverter : BaseConverter<ProductionDto, Production>
 	{
-		public Production DtoToModel(ProductionDto dto, Production model = null)
+		public override Production DtoToModel(ProductionDto dto, Production model = null)
 		{
 			if(model == null)
 			{
@@ -29,7 +29,7 @@ namespace BanHang.Converter
 			return model;
 		}
 
-		public ProductionDto ModelToDto(Production model)
+		public override ProductionDto ModelToDto(Production model)
 		{
 			return new ProductionDto()
 			{

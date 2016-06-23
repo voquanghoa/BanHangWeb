@@ -10,7 +10,7 @@ namespace BanHang.Converter
 {
 	public class UserConverter : BaseConverter<UserDto, Employee>
 	{
-		public Employee DtoToModel(UserDto dto, Employee employee = null)
+		public override Employee DtoToModel(UserDto dto, Employee employee = null)
 		{
 			if(employee == null)
 			{
@@ -33,7 +33,7 @@ namespace BanHang.Converter
 			
 		}
 
-		public UserDto ModelToDto(Employee model)
+		public override UserDto ModelToDto(Employee model)
 		{
 			return new UserDto()
 			{
