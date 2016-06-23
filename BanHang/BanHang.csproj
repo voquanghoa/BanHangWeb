@@ -215,11 +215,13 @@
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryProductController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\CustomerGroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Converter\Base\BaseConverter.cs" />
     <Compile Include="Converter\CategoryProductConverter.cs" />
+    <Compile Include="Converter\CustomerConverter.cs" />
     <Compile Include="Converter\CustomerGroupConverter.cs" />
     <Compile Include="Converter\NameConverter.cs" />
     <Compile Include="Converter\UserConverter.cs" />
@@ -231,10 +233,15 @@
     <Compile Include="Migrations\201606231201480_init.Designer.cs">
       <DependentUpon>201606231201480_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606231453266_Update.cs" />
+    <Compile Include="Migrations\201606231453266_Update.Designer.cs">
+      <DependentUpon>201606231453266_Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Communication\Request\Base\BaseRequest.cs" />
     <Compile Include="Models\Communication\Request\CategoryProductRequest.cs" />
     <Compile Include="Models\Communication\Request\CustomerGroupRequest.cs" />
+    <Compile Include="Models\Communication\Request\CustomerRequest.cs" />
     <Compile Include="Models\Communication\Request\LoginForm.cs" />
     <Compile Include="Models\Communication\Request\BrandRequest.cs" />
     <Compile Include="Models\Communication\Request\RequestUser.cs" />
@@ -243,6 +250,7 @@
     <Compile Include="Models\Communication\Response\ResponseUser.cs" />
     <Compile Include="Models\Dto\Base\BaseDto.cs" />
     <Compile Include="Models\Dto\CategoryProductDto.cs" />
+    <Compile Include="Models\Dto\CustomerDto.cs" />
     <Compile Include="Models\Dto\CustomerGroupDto.cs" />
     <Compile Include="Models\Dto\NameDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
@@ -333,6 +341,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606231201480_init.resx">
       <DependentUpon>201606231201480_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606231453266_Update.resx">
+      <DependentUpon>201606231453266_Update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
