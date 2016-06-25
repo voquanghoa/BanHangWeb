@@ -8,12 +8,14 @@ using BanHang.Models.ServiceModel;
 using BanHang.Models.ServiceModel.Base;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Http;
 
 namespace BanHang.Controllers.Base
 {
-	public abstract class BaseController<Model, Dto> : ApiController where Model : BaseModel where Dto: BaseDto
+	public abstract class BaseController<Model, Dto> : ApiController where Model : StoreModel where Dto: BaseDto
 	{
 		protected BaseRepository<Model> repository;
 		protected UnitOfWork UnitOfWork;
@@ -27,14 +29,21 @@ namespace BanHang.Controllers.Base
 			authenticationBusiness = new AuthenticationBusiness(UnitOfWork);
 		}
 
-		protected virtual List<Dto> BaseGetAll()
+		protected virtual List<Dto> BaseGetAll(Guid? authentcation, Expression<Func<Model, bool>> predicate=null)
 		{
-			return repository.GetAll().Select(x => Converter.ModelToDto(x)).ToList();
+			RequireLogin(authentcation);
+			if (predicate != null)
+			{
+				return repository.All(GetIncludes()).Where(predicate).ToList().Select(x => Converter.ModelToDto(x)).ToList();
+			}
+
+			return repository.All(GetIncludes()).Where(x=>!x.IsDeleted).ToList().Select(x => Converter.ModelToDto(x)).ToList();
 		}
 
-		protected virtual Dto BaseGet(int id)
+		protected virtual Dto BaseGet(int id, Guid? authentcation)
 		{
-			var model = repository.FindOne(id);
+			RequireLogin(authentcation);
+			var model = repository.FindOne(id, GetIncludes());
 			if(model == null)
 			{
 				throw new NotFoundException();
@@ -47,6 +56,11 @@ namespace BanHang.Controllers.Base
 		{
 			RequireLogin(authentcation);
 			return Converter.ModelToDto(repository.Create(Converter.DtoToModel(dtoObj, null)));
+		}
+
+		protected virtual string[] GetIncludes()
+		{
+			return null;
 		}
 
 		protected virtual int BaseDelete(int id, Guid? authentcation)
@@ -115,29 +129,34 @@ namespace BanHang.Controllers.Base
 			}
 			catch(NotFoundException ex)
 			{
-				Console.WriteLine(ex.Message);
+				Log(ex);
 				return StatusCode(System.Net.HttpStatusCode.NotFound);
 			}
 			catch(ForbiddenException ex)
 			{
-				Console.WriteLine(ex.Message);
+				Log(ex);
 				return StatusCode(System.Net.HttpStatusCode.Forbidden);
 			}
 			catch (UnauthorizedException ex)
 			{
-				Console.WriteLine(ex.Message);
+				Log(ex);
 				return StatusCode(System.Net.HttpStatusCode.Unauthorized);
 			}
 			catch (BadRequestException ex)
 			{
-				Console.WriteLine(ex.Message);
+				Log(ex);
 				return StatusCode(System.Net.HttpStatusCode.BadRequest);
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+				Log(ex);
 				return StatusCode(System.Net.HttpStatusCode.Unauthorized);
 			}
+		}
+
+		private void Log(Exception ex)
+		{
+			
 		}
 	}
 }

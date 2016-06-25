@@ -19,15 +19,20 @@ namespace BanHang.Controllers
 			Converter = new ProductionConverter();
 		}
 
-		public IHttpActionResult Get()
+		public IHttpActionResult Get(Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseGetAll()));
+			return ExecuteAction(() => Ok(base.BaseGetAll(authentication)));
+		}
+
+		protected override string[] GetIncludes()
+		{
+			return new string[] { "Category", "Brand" };
 		}
 
 		[ResponseType(typeof(ProductionDto))]
-		public IHttpActionResult Get(int id)
+		public IHttpActionResult Get(int id, Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseGet(id)));
+			return ExecuteAction(() => Ok(base.BaseGet(id, authentication)));
 		}
 
 		[ResponseType(typeof(ProductionDto))]
@@ -43,9 +48,9 @@ namespace BanHang.Controllers
 		}
 
 		[ResponseType(typeof(int))]
-		public IHttpActionResult Delete([FromBody]ProductionRequest request)
+		public IHttpActionResult Delete(int id, Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseDelete(request.Id, request.Authentication)));
+			return ExecuteAction(() => Ok(base.BaseDelete(id, authentication)));
 		}
 	}
 }

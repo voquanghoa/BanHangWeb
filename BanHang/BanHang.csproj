@@ -209,6 +209,7 @@
     <Compile Include="Business\AuthenticationBusiness.cs" />
     <Compile Include="Business\Logic\AuthenticationRepository.cs" />
     <Compile Include="Business\Logic\Common\BaseRepository.cs" />
+    <Compile Include="Business\Logic\Common\TemporareRepository.cs" />
     <Compile Include="Business\Logic\Common\UnitOfWork.cs" />
     <Compile Include="Business\Logic\EmployeeRepository.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RevenueController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Converter\Base\BaseConverter.cs" />
     <Compile Include="Converter\CategoryProductConverter.cs" />
@@ -228,6 +230,7 @@
     <Compile Include="Converter\InvoiceConverter.cs" />
     <Compile Include="Converter\NameConverter.cs" />
     <Compile Include="Converter\ProductionConverter.cs" />
+    <Compile Include="Converter\RevenueConverter.cs" />
     <Compile Include="Converter\UserConverter.cs" />
     <Compile Include="Exceptions\BadRequestException.cs" />
     <Compile Include="Exceptions\ForbiddenException.cs" />
@@ -249,6 +252,7 @@
     <Compile Include="Models\Communication\Response\Base\BaseResponse.cs" />
     <Compile Include="Models\Communication\Response\LoginResponse.cs" />
     <Compile Include="Models\Communication\Response\ResponseUser.cs" />
+    <Compile Include="Models\Communication\Response\RevenueResponse.cs" />
     <Compile Include="Models\Dto\Base\BaseDto.cs" />
     <Compile Include="Models\Dto\CategoryProductDto.cs" />
     <Compile Include="Models\Dto\CustomerDto.cs" />
@@ -256,6 +260,7 @@
     <Compile Include="Models\Dto\InvoiceDto.cs" />
     <Compile Include="Models\Dto\NameDto.cs" />
     <Compile Include="Models\Dto\ProductionDto.cs" />
+    <Compile Include="Models\Dto\RevenueDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\ServiceModel\Authentication.cs" />
     <Compile Include="Models\ServiceModel\Base\BaseModel.cs" />
@@ -314,7 +319,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -359,7 +366,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51745</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51745</IISUrl>
+          <IISUrl>http://localhost:55433/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://192.168.1.140:51745</CustomServerUrl>

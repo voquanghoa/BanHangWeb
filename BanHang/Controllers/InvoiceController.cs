@@ -19,15 +19,15 @@ namespace BanHang.Controllers
 			this.Converter = new InvoiceConverter();
 		}
 
-		public IHttpActionResult Get()
+		public IHttpActionResult Get(Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseGetAll()));
+			return ExecuteAction(() => Ok(base.BaseGetAll(authentication, x=>!x.IsDeleted)));
 		}
 
 		[ResponseType(typeof(InvoiceDto))]
-		public IHttpActionResult Get(int id)
+		public IHttpActionResult Get(int id, Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseGet(id)));
+			return ExecuteAction(() => Ok(base.BaseGet(id, authentication)));
 		}
 
 		[ResponseType(typeof(InvoiceDto))]
@@ -43,9 +43,9 @@ namespace BanHang.Controllers
 		}
 
 		[ResponseType(typeof(int))]
-		public IHttpActionResult Delete([FromBody]InvoiceRequest request)
+		public IHttpActionResult Delete(int id, Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseDelete(request.Id, request.Authentication)));
+			return ExecuteAction(() => Ok(base.BaseDelete(id, authentication)));
 		}
 	}
 }

@@ -8,7 +8,7 @@ using System.Web;
 
 namespace BanHang.Business.Logic.Common
 {
-	public class BaseRepository<T>  where T : StoreModel
+	public class TemporareRepository<T> where T : BaseModel
 	{
 		private readonly UnitOfWork unitOfWork;
 		private readonly DbSet<T> dbSet;
@@ -18,7 +18,7 @@ namespace BanHang.Business.Logic.Common
 		/// </summary>
 		/// <param name="unitOfWork">UnitOfWork object</param>
 		/// <exception cref="ArgumentNullException">When unitOfWork is null</exception>
-		public BaseRepository(UnitOfWork unitOfWork)
+		public TemporareRepository(UnitOfWork unitOfWork)
 		{
 			if (unitOfWork == null)
 			{
@@ -57,7 +57,7 @@ namespace BanHang.Business.Logic.Common
 		{
 			if (includes != null && includes.Any())
 			{
-				var query = dbSet.Include(includes.First()).Where(x => !x.IsDeleted);
+				var query = dbSet.Include(includes.First());
 
 				query = includes.Skip(1).Aggregate(query, (current, include) => current.Include(include));
 
@@ -74,7 +74,7 @@ namespace BanHang.Business.Logic.Common
 		/// <returns>The object if found or a Null object if not found</returns>
 		public T FindOne(int id, string[] includes = null)
 		{
-			return FindOne(x => x.Id == id && !x.IsDeleted, includes);
+			return FindOne(x => x.Id == id, includes);
 		}
 
 		/// <summary>
@@ -136,10 +136,11 @@ namespace BanHang.Business.Logic.Common
 		/// </summary>
 		/// <param name="TObject">Specified a existing object to delete.</param>
 		/// <returns>1 if success, 0 if failed</returns>
-		public virtual int Delete(T TObject) 
+		public virtual int Delete(T TObject)
 		{
-			TObject.IsDeleted = true;
-			return Update(TObject);
+
+			dbSet.Remove(TObject);
+			return unitOfWork.DbContext.SaveChanges();
 		}
 
 		public virtual int Update(T TObject)

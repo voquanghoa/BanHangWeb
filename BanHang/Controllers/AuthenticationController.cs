@@ -4,12 +4,14 @@ using BanHang.Models.Communication.Request;
 using BanHang.Models.Communication.Response;
 using BanHang.Models.Dto.Base;
 using BanHang.Models.ServiceModel;
+using BanHang.Models.ServiceModel.Base;
+using System;
 using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace BanHang.Controllers
 {
-	public class AuthenticationController: BaseController<Authentication, BaseDto>
+	public class AuthenticationController: BaseController<StoreModel, BaseDto>
 	{
 		private AuthenticationBusiness authenticationBussiness;
 
@@ -25,9 +27,9 @@ namespace BanHang.Controllers
 		}
 
 		[ResponseType(typeof(int))]
-		public IHttpActionResult Delete([FromBody]LoginForm request)
+		public IHttpActionResult Delete(Guid authentication)
 		{
-			return ExecuteAction(() => Ok(authenticationBussiness.Logout(request.Authentication)));
+			return ExecuteAction(() => Ok(authenticationBussiness.Logout(authentication)));
 		}
 	}
 }

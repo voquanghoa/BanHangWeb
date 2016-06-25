@@ -20,15 +20,15 @@ namespace BanHang.Controllers
 			Converter = new UserConverter();
 		}
 
-		public IHttpActionResult Get()
+		public IHttpActionResult Get(Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseGetAll()));
+			return ExecuteAction(() => Ok(base.BaseGetAll(authentication)));
 		}
 
 		[ResponseType(typeof(UserDto))]
-		public IHttpActionResult Get(int id)
+		public IHttpActionResult Get(int id, Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseGet(id)));
+			return ExecuteAction(() => Ok(base.BaseGet(id, authentication)));
 		}
 
 		[ResponseType(typeof(UserDto))]
@@ -44,9 +44,9 @@ namespace BanHang.Controllers
 		}
 
 		[ResponseType(typeof(int))]
-		public IHttpActionResult Delete([FromBody]RequestUser request)
+		public IHttpActionResult Delete(int id, Guid authentication)
 		{
-			return ExecuteAction(() => Ok(base.BaseDelete(request.Id, request.Authentication)));
+			return ExecuteAction(() => Ok(base.BaseDelete(id, authentication)));
 		}
 	}
 }

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace BanHang.Business.Logic
 {
-	public class AuthenticationRepository : BaseRepository<Authentication>
+	public class AuthenticationRepository : TemporareRepository<Authentication>
 	{
 		public AuthenticationRepository(UnitOfWork unitOfWork) : base(unitOfWork)
 		{

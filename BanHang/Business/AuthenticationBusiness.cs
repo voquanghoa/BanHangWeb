@@ -17,12 +17,12 @@ namespace BanHang.Business
 	{
 		
 		private readonly EmployeeRepository employeeRepository;
-		private readonly AuthenticationRepository authenticationRepository;
+		private readonly TemporareRepository<Authentication> authenticationRepository;
 
 		public AuthenticationBusiness(UnitOfWork unitOfWork)
 		{
 			employeeRepository = new EmployeeRepository(unitOfWork);
-			authenticationRepository = new AuthenticationRepository(unitOfWork);
+			authenticationRepository = new TemporareRepository<Authentication>(unitOfWork);
 		}
 
 		public int Logout(Guid? authentication)
@@ -53,7 +53,7 @@ namespace BanHang.Business
 
 		public LoginResponse Authenticate(LoginForm loginForm)
 		{
-			var employee = employeeRepository.FindOne(x => x.LoginName == loginForm.UserName && x.Password == loginForm.Password);
+			var employee = employeeRepository.FindOne(x =>!x.IsDeleted && x.LoginName == loginForm.UserName && x.Password == loginForm.Password);
 
 			if (employee == null)
 			{
